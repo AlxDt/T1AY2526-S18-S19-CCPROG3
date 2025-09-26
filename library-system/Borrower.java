@@ -9,7 +9,6 @@ public class Borrower {
     private String gender;
 
     // Methods (behavior)
-    // - Constructor <- is used to create the object with initial values
     public Borrower(String name, Date dateRegistered, String gender) {
         this.name = name;
         this.dateRegistered = dateRegistered;
@@ -32,4 +31,29 @@ public class Borrower {
     public String getGender() {
         return this.gender;
     }
+
+    public void borrow(String nameOfBookToBorrow, ArrayList<Book> books) {
+        Book book = searchBook(nameOfBookToBorrow, books);
+
+        if (book == null) {
+            System.out.println("Cannot borrow the '" + nameOfBookToBorrow + "' because it as not found in the library.");
+        } else {
+            System.out.println("The book '" + nameOfBookToBorrow + "' has been borrowed successfully.");
+
+            this.books.add(book);         
+        }
+    }
+
+    // TODO: #3 Create a new method "viewBorrowedBooks()" to list all the books that the borrower has currently borrowed
+
+    private Book searchBook(String nameOfBookToSearch, ArrayList<Book> books) {
+        for (Book bookToCheck : books) {
+            if (bookToCheck.getName().equals(nameOfBookToSearch)) {
+                return bookToCheck;
+            } 
+        }
+
+        return null;
+    }
 }
+
