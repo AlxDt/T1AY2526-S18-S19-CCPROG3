@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Driver {
     public static void main(String[] args) {
@@ -9,39 +9,34 @@ public class Driver {
         // Step #1: Assemble the objects
         ArrayList<Book> books = generateBooks();
 
-        // TODO: #1 The Date class is deprecated - can you do some research to see what more modern classes we can use instead? After that, replace
-        // ALL usages of the Date class with that new class
-        // Hint: Explore the java.time library. :)
-        
-        Date dateRegistered = new Date(2025, 9, 26);
+        LocalDate dateRegistered = LocalDate.of(2025, 9, 26);
+
         Borrower borrower = new Borrower("Alex Dela Torre", dateRegistered, "Male");
 
         // Step #2: Orchestrate the objects
         // Borrowing a book is an action/behavior done by the borrower
 
-        // TODO: #2 Change the logic of borrow() such that it ignores the casing of the search query
         borrower.borrow("The story of us", books);
-
-        // TODO: #4 Call the viewBorrowedBooks() method you created
+        borrower.viewBorrowedBooks();
     } 
 
     private static ArrayList<Book> generateBooks() {
         ArrayList<Book> books = new ArrayList<>();
 
         String[] book1Authors = new String[] { "Alex Dela Torre", "Karl Daniel" };
-        Date book1DatePublished = new Date(1999, 10, 31);
+        LocalDate book1DatePublished = LocalDate.of(1999, 10, 31);
 
         String[] book2Authors = new String[] { "Nigel Danz" };
-        Date book2DatePublished = new Date(2016, 11, 7);
+        LocalDate book2DatePublished = LocalDate.of(2016, 11, 7);
 
         String[] book3Authors = new String[] { "Mario Salandanan" };
-        Date book3DatePublished = new Date(1985, 1, 31);
+        LocalDate book3DatePublished = LocalDate.of(1985, 1, 31);
 
         String[] book4Authors = new String[] { "Benry Alcantara", "Mark Biller" };
-        Date book4DatePublished = new Date(2025, 6, 25);
+        LocalDate book4DatePublished = LocalDate.of(2025, 6, 25);
 
         String[] book5Authors = new String[] { "Nishimura Nanase", "Nakao Yamaguchi", "Shinzo Kawada" };
-        Date book5DatePublished = new Date(2025, 6, 2);
+        LocalDate book5DatePublished = LocalDate.of(2025, 6, 2);
 
         Book book1 = new Book("The Story of Us", "123-3-13-567325-2", book1Authors, book1DatePublished, "1st Edition");
         Book book2 = new Book("Random Names", "195-3-10-067055-0", book2Authors, book2DatePublished, "Special Edition");

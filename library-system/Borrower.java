@@ -1,15 +1,15 @@
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Borrower {
     // Fields (properties)
     private String name;
-    private Date dateRegistered;
+    private LocalDate dateRegistered;
     private ArrayList<Book> books;
     private String gender;
 
     // Methods (behavior)
-    public Borrower(String name, Date dateRegistered, String gender) {
+    public Borrower(String name, LocalDate dateRegistered, String gender) {
         this.name = name;
         this.dateRegistered = dateRegistered;
         this.books = new ArrayList<Book>();
@@ -20,7 +20,7 @@ public class Borrower {
         return this.name;
     }
 
-    public Date getDateRegistered() {
+    public LocalDate getLocalDateRegistered() {
         return this.dateRegistered;
     }
 
@@ -44,11 +44,15 @@ public class Borrower {
         }
     }
 
-    // TODO: #3 Create a new method "viewBorrowedBooks()" to list all the books that the borrower has currently borrowed
+    public void viewBorrowedBooks() {
+        for (Book book : this.books) {
+            System.out.println(book.getName());
+        }
+    }
 
     private Book searchBook(String nameOfBookToSearch, ArrayList<Book> books) {
         for (Book bookToCheck : books) {
-            if (bookToCheck.getName().equals(nameOfBookToSearch)) {
+            if (bookToCheck.getName().equalsIgnoreCase(nameOfBookToSearch)) {
                 return bookToCheck;
             } 
         }

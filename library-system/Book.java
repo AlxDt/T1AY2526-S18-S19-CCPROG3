@@ -1,18 +1,18 @@
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Book {
     private String name;
     private String isbn;
     private String[] authors;
-    private Date published;
-    private Date lastBorrowed;
+    private LocalDate published;
+    private LocalDate lastBorrowed;
     private String edition;
 
     public Book(
         String name,
         String isbn,
         String[] authors,
-        Date published,
+        LocalDate published,
         String edition
     ) {
         this.name = name;
@@ -34,15 +34,15 @@ public class Book {
         return this.authors;
     }
 
-    public Date getPublished() {
+    public LocalDate getPublished() {
         return this.published;
     }
 
-    public Date getLastBorrowed() {
+    public LocalDate getLastBorrowed() {
         return this.lastBorrowed;
     }
 
-    public void setLastBorrowed(Date lastBorrowed) {
+    public void setLastBorrowed(LocalDate lastBorrowed) {
         this.lastBorrowed = lastBorrowed;
     }
 
