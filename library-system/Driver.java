@@ -1,23 +1,43 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.time.LocalDate;
 
 public class Driver {
     public static void main(String[] args) {
-        // Scenario: We have a set of books, and we want to borrow some books
-        System.out.println("Welcome to the library!");
-        
-        // Step #1: Assemble the objects
+        Scanner scanner = new Scanner(System.in);
+
         ArrayList<Book> books = generateBooks();
 
-        LocalDate dateRegistered = LocalDate.of(2025, 9, 26);
+        System.out.print("What is your name? ");
+        String name = scanner.nextLine();
 
-        Borrower borrower = new Borrower("Alex Dela Torre", dateRegistered, "Male");
+        System.out.print("What is your gender? ");
+        String gender = scanner.nextLine();
 
-        // Step #2: Orchestrate the objects
-        // Borrowing a book is an action/behavior done by the borrower
+        LocalDate dateRegistered = LocalDate.now();
 
-        borrower.borrow("The story of us", books);
-        borrower.viewBorrowedBooks();
+        Borrower borrower = new Borrower(name, dateRegistered, gender);
+
+        System.out.println();
+        System.out.println("Welcome to the library, " + borrower.getName() + "!");
+
+        String response;
+
+        do {
+            System.out.println();
+            System.out.println("Show my [d]etails");
+            System.out.println("List the books in the [l]ibrary");
+            System.out.println("List the books I have with [m]e");
+            System.out.println("[B]orrow a book");
+            System.out.println("[R]eturn a book");
+            System.out.println("[Q]uit");
+            System.out.println();
+            System.out.print("What do you want to do? ");
+
+            response = scanner.nextLine();
+        } while (!response.equalsIgnoreCase("Q"));
+
+        scanner.close();
     } 
 
     private static ArrayList<Book> generateBooks() {
