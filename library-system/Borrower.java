@@ -20,7 +20,7 @@ public class Borrower {
         return this.name;
     }
 
-    public LocalDate getLocalDateRegistered() {
+    public LocalDate getDateRegistered() {
         return this.dateRegistered;
     }
 
@@ -32,11 +32,11 @@ public class Borrower {
         return this.gender;
     }
 
-    public void borrow(String nameOfBookToBorrow, ArrayList<Book> books) {
+    public void borrowBook(String nameOfBookToBorrow, ArrayList<Book> books) {
         Book book = searchBook(nameOfBookToBorrow, books);
 
         if (book == null) {
-            System.out.println("Cannot borrow the '" + nameOfBookToBorrow + "' because it as not found in the library.");
+            System.out.println("Cannot borrow the '" + nameOfBookToBorrow + "' because it was not found in the library.");
         } else {
             System.out.println("The book '" + nameOfBookToBorrow + "' has been borrowed successfully.");
 
@@ -44,10 +44,16 @@ public class Borrower {
         }
     }
 
-    public void viewBorrowedBooks() {
-        for (Book book : this.books) {
-            System.out.println(book.getName());
+    public Book returnBook(String nameOfBook) {
+        Book book = searchBook(nameOfBook, this.books);
+        
+        if (book == null) {
+            System.out.println("Cannot return the '" + nameOfBook + "' because " + this.name + " does not have it.");
+        } else {
+            this.books.remove(book);
         }
+        
+        return book;
     }
 
     private Book searchBook(String nameOfBookToSearch, ArrayList<Book> books) {

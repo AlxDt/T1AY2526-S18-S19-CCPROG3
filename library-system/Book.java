@@ -22,6 +22,17 @@ public class Book {
         this.edition = edition;
     }
 
+    public Book(
+        String name,
+        String isbn,
+        String[] authors,
+        LocalDate published
+    ) {
+        // Call the OTHER constructor
+        // Constructor chaining
+        this(name, isbn, authors, published, null);
+    }
+
     public String getName() {
         return this.name;
     }

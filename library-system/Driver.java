@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.time.LocalDate;
 
 public class Driver {
+    // Methods
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -35,10 +36,109 @@ public class Driver {
             System.out.print("What do you want to do? ");
 
             response = scanner.nextLine();
+
+            switch (response.toLowerCase()) {
+                case "d":
+                    showDetails(borrower);
+
+                    break;
+                case "l":
+                    showBooksOfLibrary(books);
+
+                    break;
+                case "m":
+                    showBooksOfBorrower(borrower);
+
+                    break;
+                // TODO #3: Create a case for the borrow feature (1 pt)
+                case "b":
+                    borrowBook(borrower, books); 
+
+                    break;
+                // TODO: 4: Create a case for the return feature (1 pt)
+                case "r":
+                    returnBook(borrower, books);
+
+                    break;
+                default:
+                    if (!response.equalsIgnoreCase("q")) {
+                        System.out.println("Invalid input");
+                    }
+
+                    break;
+            }
         } while (!response.equalsIgnoreCase("Q"));
 
         scanner.close();
-    } 
+    }
+
+    private static void showDetails(Borrower borrower) {
+        System.out.println("[DETAILS]");
+        System.out.println("Name: " + borrower.getName());
+        System.out.println("Gender: " + borrower.getGender());
+        System.out.println("Date registered: " + borrower.getDateRegistered());
+    }
+
+    private static void showBooksOfLibrary(ArrayList<Book> books) {
+        System.out.println("[BOOKS IN LIBRARY]");
+
+        int bookIndex = 1;
+
+        for (Book book : books) {
+            System.out.println(bookIndex + ". " + book.getName() + " || " + book.getIsbn());
+
+            bookIndex++;
+        }
+    }
+
+    private static void showBooksOfBorrower(Borrower borrower) {
+        System.out.println("[BOOKS BORROWED BY " + borrower.getName() + "]");
+        
+        if (borrower.getBooks().size() == 0) {
+            System.out.println(borrower.getName() + " does not have any borrowed books.");
+        } else {
+            int bookIndex = 1;
+            
+            for (Book book : borrower.getBooks()) {
+                System.out.println(bookIndex + ". " + book.getName() + " || " + book.getIsbn());
+                
+                bookIndex++;
+            }
+        }
+    }
+
+    private static void borrowBook(Borrower borrower, ArrayList<Book> books) {
+        System.out.println("[BORROW A BOOK]");
+
+        // TODO #1: Complete the method contents
+        // 1. Ask for the name of the book to borrow; keep asking as long as the user enters a book that
+        //    doesn't exist in the library (the books in the library is provided as a method in the parameter) (3 pts)
+        // 2. Transfer the book from the library to the borrower. By the end of this step, ensure that the book is
+        //    not in the posession of the library anymore: it should be in the posession of the borrower. (5 pts)
+        //    (hint: use the methods that already exist in the Book class)
+        // 3. Update the book's last borrowed date to the current date (hint: you can RTFM how to get the current date, or you can just look for the answer in this Driver class hehe) (2 pts)
+
+
+
+
+
+    }
+
+    private static void returnBook(Borrower borrower, ArrayList<Book> books) {
+        System.out.println("[RETURN A BOOK]");
+
+        // TODO #2: Complete the method contents
+        // 1. Ask for the name of the book to return; keep asking as long as the user entered a book that
+        //    doesn't exist in the posession of the borrower (3 pts)
+        // 2. Transfer the book from the borrower to the library . By the end of this step, ensure that the book is
+        //    not in the posession of the borrower anymore: it should be in the posession of the library (the books in the library is provided as a method in the parameter) (5 pts)
+        //    (hint: use the methods that already exist in the Book class)
+
+
+
+
+
+    }
 
     private static ArrayList<Book> generateBooks() {
         ArrayList<Book> books = new ArrayList<>();
