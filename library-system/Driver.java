@@ -51,15 +51,8 @@ public class Driver {
 
                     break;
                 // TODO #3: Create a case for the borrow feature (1 pt)
-                case "b":
-                    borrowBook(borrower, books); 
 
-                    break;
                 // TODO: 4: Create a case for the return feature (1 pt)
-                case "r":
-                    returnBook(borrower, books);
-
-                    break;
                 default:
                     if (!response.equalsIgnoreCase("q")) {
                         System.out.println("Invalid input");
