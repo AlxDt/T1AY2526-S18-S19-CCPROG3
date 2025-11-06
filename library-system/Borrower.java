@@ -56,7 +56,7 @@ public class Borrower {
         return book;
     }
 
-    private Book searchBook(String nameOfBookToSearch, ArrayList<Book> books) {
+    public Book searchBook(String nameOfBookToSearch, ArrayList<Book> books) {
         for (Book bookToCheck : books) {
             if (bookToCheck.getName().equalsIgnoreCase(nameOfBookToSearch)) {
                 return bookToCheck;

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 
-public class Driver {
+public class Driver {    
     // Methods
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -51,8 +51,15 @@ public class Driver {
 
                     break;
                 // TODO #3: Create a case for the borrow feature (1 pt)
+                case "b":
+                    borrowBook(borrower, books, scanner);
 
+                    break;
                 // TODO: 4: Create a case for the return feature (1 pt)
+                case "r":
+                    returnBook(borrower, books, scanner);
+
+                    break;
                 default:
                     if (!response.equalsIgnoreCase("q")) {
                         System.out.println("Invalid input");
@@ -100,24 +107,38 @@ public class Driver {
         }
     }
 
-    private static void borrowBook(Borrower borrower, ArrayList<Book> books) {
+    private static void borrowBook(Borrower borrower, ArrayList<Book> books, Scanner scanner) {
         System.out.println("[BORROW A BOOK]");
 
         // TODO #1: Complete the method contents
         // 1. Ask for the name of the book to borrow; keep asking as long as the user enters a book that
-        //    doesn't exist in the library (the books in the library is provided as a method in the parameter) (3 pts)
+        //    doesn't exist in the library (the books in the library is provided as a parameter in the method) (3 pts)
         // 2. Transfer the book from the library to the borrower. By the end of this step, ensure that the book is
         //    not in the posession of the library anymore: it should be in the posession of the borrower. (5 pts)
         //    (hint: use the methods that already exist in the Book class)
         // 3. Update the book's last borrowed date to the current date (hint: you can RTFM how to get the current date, or you can just look for the answer in this Driver class hehe) (2 pts)
+        String nameOfBookToBorrow;
+        Book bookToBorrow;
 
+        do {
+            nameOfBookToBorrow = scanner.nextLine();
 
+            bookToBorrow = borrower.searchBook(nameOfBookToBorrow, books);
+        }
+        while (bookToBorrow == null);
+        
+        // Have the book in posession of the borrower
+        borrower.borrowBook(nameOfBookToBorrow, books);
 
-
-
+        // Remove the book from the library
+        books.remove(bookToBorrow);
+        
+        // Update the book's last borrower data
+        LocalDate dateNow = LocalDate.now();
+        bookToBorrow.setLastBorrowed(dateNow);
     }
 
-    private static void returnBook(Borrower borrower, ArrayList<Book> books) {
+    private static void returnBook(Borrower borrower, ArrayList<Book> books, Scanner scanner) {
         System.out.println("[RETURN A BOOK]");
 
         // TODO #2: Complete the method contents
@@ -126,11 +147,21 @@ public class Driver {
         // 2. Transfer the book from the borrower to the library . By the end of this step, ensure that the book is
         //    not in the posession of the borrower anymore: it should be in the posession of the library (the books in the library is provided as a method in the parameter) (5 pts)
         //    (hint: use the methods that already exist in the Book class)
+        String nameOfBookToReturn;
+        Book bookToReturn;
 
+        do {
+            nameOfBookToReturn = scanner.nextLine();
 
+            bookToReturn = borrower.searchBook(nameOfBookToReturn, borrower.getBooks());
+        }
+        while (bookToReturn == null);
 
+        // Take the book away from the borrower
+        borrower.returnBook(nameOfBookToReturn);
 
-
+        // Transfer the book from the borrower to the library
+        books.add(bookToReturn);
     }
 
     private static ArrayList<Book> generateBooks() {
