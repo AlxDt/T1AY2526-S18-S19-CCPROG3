@@ -1,10 +1,10 @@
 import java.time.LocalDate;
+import java.util.Random;
 
-public class Book {
+public class Book extends Item {
     private String name;
     private String isbn;
     private String[] authors;
-    private LocalDate published;
     private LocalDate lastBorrowed;
     private String edition;
 
@@ -15,10 +15,10 @@ public class Book {
         LocalDate published,
         String edition
     ) {
+       super (published);
         this.name = name;
         this.isbn = isbn;
         this.authors = authors;
-        this.published = published;
         this.edition = edition;
     }
 
@@ -45,9 +45,6 @@ public class Book {
         return this.authors;
     }
 
-    public LocalDate getPublished() {
-        return this.published;
-    }
 
     public LocalDate getLastBorrowed() {
         return this.lastBorrowed;
@@ -59,5 +56,23 @@ public class Book {
 
     public String getEdition() {
         return this.edition;
+    }
+
+    // An override is when a child replaces the behavior of its parent
+    // In this case, the child is replacing the behavior of the generation of the parent's serial number
+    @Override
+    public String generateSerialNumber() {
+        String serialNumber = "";
+
+        // Book: Bxxxx
+        serialNumber += "BOK";
+        serialNumber += super.generateSerialNumber();
+
+        return serialNumber;
+    }
+    
+    @Override
+    public String toString() {
+        return super.getSerialNumber() + " " + this.name + " || " + this.isbn;
     }
 }

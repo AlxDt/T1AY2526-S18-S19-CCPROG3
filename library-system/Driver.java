@@ -7,7 +7,7 @@ public class Driver {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        ArrayList<Book> books = generateBooks();
+        ArrayList<Item> items = generateItems();
 
         System.out.print("What is your name? ");
         String name = scanner.nextLine();
@@ -43,7 +43,7 @@ public class Driver {
 
                     break;
                 case "l":
-                    showBooksOfLibrary(books);
+                    showItemsOfLibrary(items);
 
                     break;
                 case "m":
@@ -52,12 +52,12 @@ public class Driver {
                     break;
                 // TODO #3: Create a case for the borrow feature (1 pt)
                 case "b":
-                    borrowBook(borrower, books, scanner);
+                    //borrowBook(borrower, items, scanner);
 
                     break;
                 // TODO: 4: Create a case for the return feature (1 pt)
                 case "r":
-                    returnBook(borrower, books, scanner);
+                    //returnBook(borrower, items, scanner);
 
                     break;
                 default:
@@ -79,15 +79,15 @@ public class Driver {
         System.out.println("Date registered: " + borrower.getDateRegistered());
     }
 
-    private static void showBooksOfLibrary(ArrayList<Book> books) {
-        System.out.println("[BOOKS IN LIBRARY]");
+    private static void showItemsOfLibrary(ArrayList<Item> items) {
+        System.out.println("[ITEMS IN LIBRARY]");
 
-        int bookIndex = 1;
+        int index = 1;
 
-        for (Book book : books) {
-            System.out.println(bookIndex + ". " + book.getName() + " || " + book.getIsbn());
+        for (Item item : items) {
+            System.out.println(index + ". " + item);
 
-            bookIndex++;
+            index++;
         }
     }
 
@@ -164,8 +164,8 @@ public class Driver {
         books.add(bookToReturn);
     }
 
-    private static ArrayList<Book> generateBooks() {
-        ArrayList<Book> books = new ArrayList<>();
+    private static ArrayList<Item> generateItems() {
+        ArrayList<Item> items = new ArrayList<>();
 
         String[] book1Authors = new String[] { "Alex Dela Torre", "Karl Daniel" };
         LocalDate book1DatePublished = LocalDate.of(1999, 10, 31);
@@ -188,12 +188,22 @@ public class Driver {
         Book book4 = new Book("Ghost Project Stories", "858-1-11-569325-4", book4Authors, book4DatePublished, "11th Edition");
         Book book5 = new Book("Kimetsu no Yaiba: A Review", "159-0-75-785391-6", book5Authors, book5DatePublished, "Limited Edition");
 
-        books.add(book1);
-        books.add(book2);
-        books.add(book3);
-        books.add(book4);
-        books.add(book5);
+        LocalDate newspaper1DatePublished = LocalDate.of(2025, 10, 2);
+        Newspaper newspaper1 = new Newspaper(newspaper1DatePublished, "Manila Bulletin", "End of an era RIP");
 
-        return books;
+        DVD dvd1 = new DVD(LocalDate.now(), "Cars 2", 3.1);
+
+        // We are adding not just books, but newspapers in our Items ArrayList
+        items.add(book1);
+        items.add(book2);
+        items.add(book3);
+        items.add(book4);
+        items.add(book5);
+
+        items.add(newspaper1);
+
+        items.add(dvd1);
+
+        return items;
     }
 }
